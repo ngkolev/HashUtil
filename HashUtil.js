@@ -1,4 +1,4 @@
-﻿;(function (parent, $, undefined) {
+﻿; (function (parent, undefined) {
 
     var location = document.location;
     var e = encodeURIComponent;
@@ -9,20 +9,6 @@
 
         var h = location.hash;
         return (h.length > 0 && h[0] == '#') ? h.substring(1) : h
-    }
-
-    // Get value from key from hash parameters. If it doesn't exist returns null
-    function getValue(key) {
-        var hash = getHash();
-        var params = hash.split('&');
-        for (var i = 0; i < params.length; i++) {
-            var paramPair = params[i].split('=');
-            if (d(paramPair[0]) == key) {
-                return typeof paramPair[1] === 'undefined' ? null : d(paramPair[1]);
-            }
-        }
-
-        return null;
     }
 
     // Set value from to hash parameters
@@ -40,6 +26,20 @@
 
             location.hash += key + '=' + e(value);
         }
+    }
+
+    // Get value from key from hash parameters. If it doesn't exist returns null
+    function getValue(key) {
+        var hash = getHash();
+        var params = hash.split('&');
+        for (var i = 0; i < params.length; i++) {
+            var paramPair = params[i].split('=');
+            if (d(paramPair[0]) == key) {
+                return typeof paramPair[1] === 'undefined' ? null : d(paramPair[1]);
+            }
+        }
+
+        return null;
     }
 
     // Set all properties of a flat object to the hash parameters. The existing ones with different key will not be changed
@@ -70,7 +70,6 @@
 
             } else {
                 return getValue(key);
-
             }
         },
 
@@ -87,4 +86,4 @@
         }
     };
 
-})(window, Wican, jQuery);
+})(window);
